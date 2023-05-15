@@ -1,144 +1,200 @@
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-
-
-#define MAX_ESPACIO = 10
-#define MAX_DIAS = 7
-#define MAX_HORAS 24.0
-#define PRECIO_MOTOS 50
-#define PRECIO_AUTOS 75
-#define PRECIO_CAMIONETAS 100
-//UN ESTACIONAMIENTO DE 10 ESPACIOS SOLICITO UN PROGRAMA QUE ALMACENE DATOS POR DIAS DE LA SEMANA (1 a 7)
-
-/*
-EL SISTEMA DEL ESTACIONAMIENTO CUENTA CON CATEGORIAS PARA CALCULAR EL COSTO POR HORA
-50$ x HORA MOTOS
-75$ x HORA AUTOS
-100$ x HORA CAMINETAS
-
-
-CAT 'M','A','C' (CHAR)
-
-HORAS DE ESTADIA DEL VEHICULO (FLOAT)
-
-ESPACIO DEL ESTACIONAMIENTO ELEGIDA (1 al 10) (INT)
-
-TAMBIEN PARA PERMANECER EL DUEÑO DEL VEHICULO DEBE DE DECLARAR LA PANTENTE PARA MOTOS DEBE TENER 7 CARACTERES y 6 PARA AUTOS Y CAMIONETAS
-STR
-
-1. QUE DIA ESTACIONARON MAS MOTOS
-2. CANTIDAD DE AUTOS ESTACIONADOS EL DOMINGO
-3. QUE ESPACIO DE ESTACIONAMIENTO FUE LA MAS SOLICITADA Y CUAL MENOS
-4. DEL MIERCOLES, LA PATENTE DE LA CAMIONETA QUE MAS TIEMPO ESTUVO ESTACIONADO
-
-5. TOTAL DE VEHICULOS ESTACIONADOS POR TIPO
-6. TOTAL RECAUDADO DE LA SEMANA
-7. DIA QUE MAS SE RECAUDO
-*/
-//FUNCIONES
-float validar_horas(float horas_min,float horas_max){
-	float horas;
-	do{
-	
-	printf("\n INGRESE CUANTAS HORAS ESTUVO  ESTACIONADO EL VEHICULO ESTACIONADO: ");
-	scanf("%f",&horas);
-	
-	}while(horas<horas_min && horas>horas_max);
-	
-	return horas;
-
-}//VALIDA QUE LAS HORAS DE ESTACIONAMIENTO NO SEAN MENORES A 0 y TAMPOCO MAYORES A 24 x DIA
-
-int validar_estacionamiento(int estacionamiento_min,int estacionamiento_max){
-	int estacionamiento;
-	do{
-	
-	printf("\n INGRESE EN QUE LUGAR ESTUVO ESTACIONADO EL VEHICULO ESTACIONADO: ");
-	scanf("%d",&estacionamiento);
-	
-	}while(estacionamiento<estacionamiento_min && estacionamiento>estacionamiento_max);
-	
-	return estacionamiento;
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <windows.h>
+void mostrarCategoria(char cat){
+	switch (cat) {
+            case 'm':
+                printf("moto\n");
+                break;
+            case 'a':
+                printf("auto \n ");
+                break;
+            case 'c':
+                printf("camioneta \n");
+                break;
+        }
 
 }
 
-float obtener_precio(char categoria) {
-   
-    switch (categoria) {
-        case 'M':
-            return 50.0;
-        case 'A':
-            return 75.0;
-        case 'C':
-            return 100.0;
-        default:
-            return 0.0;
-    }
-}// Función que recibe una categoría de vehículo y devuelve el costo por hora correspondiente
-
-float calcular_costo(float horas, char categoria) {
-    float precio = obtener_precio(categoria);
-    return horas * precio;
-}// Función que recibe la cantidad de horas estacionadas y la categoría de vehículo, y devuelve el costo total
-
-
-int main(int argc, char** argv) {
-	//VARIABLES
-	int i;
-	
-	//VARIABLES INGRESADAS POR EL USUARIO
-	char categoria;
-	int estacionamiento=0;
-	float horas_de_estadia=0.0;
-	char patente[8];
-	
-	printf("\n  88888888b .d88888b  d888888P  .d888888   a88888b. dP  .88888.  888888ba   .d888888  8888ba.88ba  dP  88888888b 888888ba  d888888P  .88888.  \n");
-	printf("\n   88        88.    '    88    d8'    88  d8'   `88 88 d8'   `8b 88    `8b d8'    88  88  `8b  `8b 88  88        88    `8b    88    d8'   8b \n");
-	printf("\n  a88aaaa    `Y88888b.    88    88aaaaa88a 88        88 88     88 88     88 88aaaaa88a 88   88   88 88 a88aaaa    88     88    88    88     88\n");
-	printf("\n   88              `8b    88    88     88  88        88 88     88 88     88 88     88  88   88   88 88  88        88     88    88    88     88 \n");
-	printf("\n   88        d8'   .8P    88    88     88  Y8.   .88 88 Y8.   .8P 88     88 88     88  88   88   88 88  88        88     88    88    Y8.   .8P \n");
-	printf("\n  88888888P  Y88888P     dP    88     88   Y88888P' dP  `8888P'  dP     dP 88     88  dP   dP   dP dP  88888888P dP     dP    dP     `8888P'  \n");
-	printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo  \n");
-	
-	
-	for(i=0;i<7;i++){
-		fflush(stdin);
-		printf("\n\n Ingrese CAT del vehiculo: ");
-		scanf("%c",&categoria);
-		fflush(stdin);
-		
-		printf(" Ingrese la patente del vehiculo: ");
-		gets(patente);
-		switch(categoria){
-		case 'M':
-			do{
-				fflush(stdin);
-				printf("Ingrese la patente del vehiculo: ");
-				gets(patente);
-			}while(strlen(patente)<6 && strlen(patente)>8);
-            break;
-        case 'A':
-        	do{
-				fflush(stdin);
-				printf("Ingrese la patente del vehiculo: ");
-				gets(patente);
-			}while(strlen(patente)<5 && strlen(patente)>7);
-        	break;
-        case 'C':
-        	do{
-				fflush(stdin);
-				printf("Ingrese la patente del vehiculo: ");
-				gets(patente);
-			}while(strlen(patente)<5 && strlen(patente)>7);
-            break;	
-        }
-        
-		horas_de_estadia=validar_horas(0,24);
-        estacionamiento=validar_estacionamiento(0,10);
+void mostrarDia(int dia){
+	printf("\nDIA: ");
+	switch(dia){
+		case 0:
+			printf("LUNES\n \n");
+			break;
+		case 1:
+			printf("MARTES\n\n");
+			break;
+		case 2:
+			printf("MIERCOLES\n\n");
+			break;
+		case 3:
+			printf("JUEVES\n\n");
+			break;
+		case 4:
+			printf("VIERNES\n\n");
+			break;
+		case 5:
+			printf("SABADO\n\n");
+			break;
+		case 6:
+			printf("DOMINGO\n\n");
+			break;
 	}
+}
+
+
+int main() {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    int autosDomingo = 0, s=0;
+    char camionetaMasTiempo[7];
+    int contadorMotos = 0, contadorAutos = 0, contadorCamionetas = 0;
+    float recaudacionTotal = 0, maxDuracionCamioneta=0;
+    int flag=0;
+    
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN);
+	printf("\n  88888888b .d88888b  d888888P  .d888888   a88888b. dP  .88888.  888888ba   .d888888  8888ba.88ba  dP  88888888b 888888ba  d888888P  .88888.");
+	printf("\n   88        88.    '    88    d8'    88  d8'   `88 88 d8'   `8b 88    `8b d8'    88  88  `8b  `8b 88  88        88    `8b    88    d8'    8b");
+	printf("\n  a88aaaa    `Y88888b.    88    88aaaaa88a 88        88 88     88 88     88 88aaaaa88a 88   88   88 88 a88aaaa    88     88    88    88     88");
+	printf("\n   88              `8b    88    88     88  88        88 88     88 88     88 88     88  88   88   88 88  88        88     88    88    88     88");
+	printf("\n   88        d8'   .8P    88    88     88  Y8.   .88 88 Y8.   .8P 88     88 88     88  88   88   88 88  88        88     88    88    Y8.   .8P");
+	printf("\n  88888888P  Y88888P     dP    88     88   Y88888P' dP  `8888P'  dP     dP 88     88  dP   dP   dP dP  88888888P dP     dP    dP     `8888P'  ");
+	printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    int i;
+    for (i = 7; i < 7;) {
+        char categoria;
+        float horasEstadia, precio;
+        int espacio;
+        char patente[7];
+		mostrarDia(i);
+		
+		
+		fflush(stdin);
+        printf("Ingrese la categoria del vehiculo (M: moto, A: auto, C: camioneta): ");
+        scanf(" %c", &categoria);
+
+        categoria = tolower(categoria); // Convertir a minúscula
+
+        printf("Ingrese las horas de estadia del vehiculo: ");
+        scanf("%f", &horasEstadia);
+
+        printf("Ingrese el espacio del estacionamiento elegido (1 al 10): ");
+        scanf("%d", &espacio);
+
+        if (espacio < 1 || espacio > 10) {
+        	SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            printf("ERROR: El espacio de estacionamiento elegido es invalido. Seleccionar entre 1 y 10.\n");
+            SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+            continue; // 
+        }
+
+        switch (categoria) {
+            case 'm':
+                printf("Ingrese la patente de la moto (7 caracteres): ");
+                scanf("%s", patente);
+				        if (strlen(patente) < 7 || strlen(patente) > 7) {
+				        SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            			printf("ERROR: La patente de las motos debe de ser de 7 caracteres.\n");
+            			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+            			continue; // 
+       			 }		
+                contadorMotos++;
+                precio = horasEstadia * 50;
+                recaudacionTotal += precio;
+                break;
+            case 'a':
+                printf("Ingrese la patente del auto (6 caracteres): ");
+                scanf("%s", patente);
+				if (strlen(patente) < 6 || strlen(patente) > 6) {
+						SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            			printf("ERROR: La patente de los autos debe de ser de 6 caracteres.\n");
+            			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+            			continue; // 
+       			}	
+                contadorAutos++;
+                precio = horasEstadia * 75;
+                recaudacionTotal += precio;
+                break;
+            case 'c':
+                printf("Ingrese la patente de la camioneta (6 caracteres): ");
+                scanf("%s", patente);
+                if (strlen(patente) < 6 || strlen(patente) > 6) {
+                		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+            			printf("ERROR: La patente de las camionetas debe de ser de 6 caracteres.\n");
+            			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+            			continue; // 
+       			}
+				precio = horasEstadia * 100;
+                contadorCamionetas++;
+                recaudacionTotal += precio;
+				/* BANDERA*/
+				if(i==2)
+				{
+					
+					if(flag==0){
+						maxDuracionCamioneta = horasEstadia;
+    					strcpy(camionetaMasTiempo, patente);
+    					s=1;
+					}
+					
+					if(flag==1){
+						if (horasEstadia > maxDuracionCamioneta) {
+    					maxDuracionCamioneta = horasEstadia;
+    					strcpy(camionetaMasTiempo, patente);
+						}						
+					}
+				}
+                
+
+                break;
+            default:
+            	SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+                printf("ERROR: La categoria ingresada es invalida. Seleccionar entre M, A o C.\n");
+                SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+                continue;
+        }
+
+        if (i == 6) {
+            autosDomingo = contadorAutos;
+        }
+		//MOSTRAR VALORES INGRESADOS
+		/*PREGUNTAR POR EL TICKET*/
+		printf("\n VEHICULO: ");
+		mostrarCategoria(categoria);
+		printf("\n LUGAR DE ESTACIONAMIENTO: %d \n",espacio);
+		printf("\n PATENTE: %s\n",patente);
+		printf("\n HORAS DE ESTADIA: %.2f \n", horasEstadia);
+		printf("\n COSTO: %.2f\n", precio);
+		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+		printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+		printf("\t\t\t\t\t!GRACIAS POR VENIR AL ESTACIONAMIENTO!");
+		printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+		
+
+        char opcion;
+        printf("\nDesea continuar al siguiente dia? (S: si, N: no): ");
+        scanf(" %c", &opcion);
+		fflush(stdin);
+        opcion = tolower(opcion); // Convertir a minúscula
+		
+        if (opcion == 's') {
+            i++;
+        }
+    }
 	
-	
-	return 0;
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+	printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+    printf("\n 1. Cantidad de autos estacionados el domingo: %d\n", autosDomingo);
+    printf("2. Patente de la camioneta que mas tiempo estuvo estacionada el miercoles: %s\n", camionetaMasTiempo);
+    printf("3. Total de vehiculos estacionados por tipo - Motos: %d, Autos: %d, Camionetas: %d\n", contadorMotos, contadorAutos, contadorCamionetas);
+    printf("4. Total recaudado de la semana: $%.2f\n", recaudacionTotal);
+	printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    return 0;
 }
