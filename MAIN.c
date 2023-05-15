@@ -47,12 +47,12 @@ void mostrarDia(int dia){
 
 int main() {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    int autosDomingo = 0, s=0;
+    int autosDomingo = 0;
     char camionetaMasTiempo[7];
     int contadorMotos = 0, contadorAutos = 0, contadorCamionetas = 0;
     float recaudacionTotal = 0, maxDuracionCamioneta=0;
     int flag=0;
-    
+
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN);
 	printf("\n  88888888b .d88888b  d888888P  .d888888   a88888b. dP  .88888.  888888ba   .d888888  8888ba.88ba  dP  88888888b 888888ba  d888888P  .88888.");
 	printf("\n   88        88.    '    88    d8'    88  d8'   `88 88 d8'   `8b 88    `8b d8'    88  88  `8b  `8b 88  88        88    `8b    88    d8'    8b");
@@ -63,14 +63,14 @@ int main() {
 	printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
 	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     int i;
-    for (i = 7; i < 7;) {
+    for (i = 0; i < 7;) {
         char categoria;
         float horasEstadia, precio;
         int espacio;
         char patente[7];
 		mostrarDia(i);
-		
-		
+
+
 		fflush(stdin);
         printf("Ingrese la categoria del vehiculo (M: moto, A: auto, C: camioneta): ");
         scanf(" %c", &categoria);
@@ -87,7 +87,7 @@ int main() {
         	SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             printf("ERROR: El espacio de estacionamiento elegido es invalido. Seleccionar entre 1 y 10.\n");
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-            continue; // 
+            continue; //
         }
 
         switch (categoria) {
@@ -98,8 +98,8 @@ int main() {
 				        SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             			printf("ERROR: La patente de las motos debe de ser de 7 caracteres.\n");
             			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-            			continue; // 
-       			 }		
+            			continue; //
+       			 }
                 contadorMotos++;
                 precio = horasEstadia * 50;
                 recaudacionTotal += precio;
@@ -111,8 +111,8 @@ int main() {
 						SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             			printf("ERROR: La patente de los autos debe de ser de 6 caracteres.\n");
             			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-            			continue; // 
-       			}	
+            			continue; //
+       			}
                 contadorAutos++;
                 precio = horasEstadia * 75;
                 recaudacionTotal += precio;
@@ -124,7 +124,7 @@ int main() {
                 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             			printf("ERROR: La patente de las camionetas debe de ser de 6 caracteres.\n");
             			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-            			continue; // 
+            			continue; //
        			}
 				precio = horasEstadia * 100;
                 contadorCamionetas++;
@@ -132,21 +132,21 @@ int main() {
 				/* BANDERA*/
 				if(i==2)
 				{
-					
+
 					if(flag==0){
 						maxDuracionCamioneta = horasEstadia;
     					strcpy(camionetaMasTiempo, patente);
-    					s=1;
+    					flag=1;
 					}
-					
+
 					if(flag==1){
 						if (horasEstadia > maxDuracionCamioneta) {
     					maxDuracionCamioneta = horasEstadia;
     					strcpy(camionetaMasTiempo, patente);
-						}						
+						}
 					}
 				}
-                
+
 
                 break;
             default:
@@ -172,19 +172,19 @@ int main() {
 		printf("\t\t\t\t\t!GRACIAS POR VENIR AL ESTACIONAMIENTO!");
 		printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-		
+
 
         char opcion;
         printf("\nDesea continuar al siguiente dia? (S: si, N: no): ");
         scanf(" %c", &opcion);
 		fflush(stdin);
         opcion = tolower(opcion); // Convertir a minúscula
-		
+
         if (opcion == 's') {
             i++;
         }
     }
-	
+
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 	printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
     printf("\n 1. Cantidad de autos estacionados el domingo: %d\n", autosDomingo);
