@@ -17,7 +17,7 @@ void mostrarCategoria(char cat)
         break;
     }
 
-} // Recibe el parametro de categoria, y luego muestra que tipo de vehiculo es
+}
 
 void mostrarDia(int dia)
 {
@@ -46,7 +46,7 @@ void mostrarDia(int dia)
         printf("DOMINGO\n\n");
         break;
     }
-} // toma el valor del indice, y segun el valor muestra que dia es.
+}
 void mostrarTicket(char categoria, int espacio, char patente[], float horasEstadia, float precio)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -64,12 +64,12 @@ void mostrarTicket(char categoria, int espacio, char patente[], float horasEstad
     printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
 
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-} //Muestra el ticket.
+}
 
 
 int main()
 {
-	//Declaracion de variables para resolver los enunciados		 
+	 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     int autosDomingo = 0;
     char camionetaMasTiempo[7];
@@ -88,14 +88,14 @@ int main()
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     int i;
     for (i = 0; i < 7;)
-    {	//Declaracion de variables para ingreso de datos
+    {
         char categoria;
         float horasEstadia, precio;
         int espacio;
         char patente[7];
         mostrarDia(i);
-	
-	//Ingresamos categoria, horas de estadia y espacio del estacionamiento elegido
+
+
         fflush(stdin);
         printf("Ingrese la categoria del vehiculo (M: moto, A: auto, C: camioneta): ");
         scanf(" %c", &categoria);
@@ -113,7 +113,7 @@ int main()
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
             printf("ERROR: El espacio de estacionamiento elegido es invalido. Seleccionar entre 1 y 10.\n");
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-            continue; // Si el espacio elegido es menor a 1 y mayor que 10, informa al usuario del error y vuelve al inicio de la iteracion, para ingresar correctamente los datos
+            continue; //
         }
 
         switch (categoria)
@@ -126,7 +126,7 @@ int main()
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
                 printf("ERROR: La patente de las motos debe de ser de 7 caracteres.\n");
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-                continue; //Si la patente no coincide con la longitud de caracteres informa al usuario del error y vuelve al inicio de la iteracion, para ingresar correctamente los datos
+                continue; //
             }
             contadorMotos++;
             precio = horasEstadia * 50;
@@ -140,8 +140,12 @@ int main()
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
                 printf("ERROR: La patente de los autos debe de ser de 6 caracteres.\n");
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-                continue; //Si la patente no coincide con la longitud de caracteres informa al usuario del error y vuelve al inicio de la iteracion, para ingresar correctamente los datos
+                continue; //
             }
+            if (i == 6)
+        	{
+            autosDomingo += 1;
+        	}
             contadorAutos++;
             precio = horasEstadia * 75;
             recaudacionTotal += precio;
@@ -154,7 +158,7 @@ int main()
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
                 printf("ERROR: La patente de las camionetas debe de ser de 6 caracteres.\n");
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-                continue; //Si la patente no coincide con la longitud de caracteres informa al usuario del error y vuelve al inicio de la iteracion, para ingresar correctamente los datos
+                continue; //
             }
             precio = horasEstadia * 100;
             contadorCamionetas++;
@@ -187,11 +191,6 @@ int main()
             printf("ERROR: La categoria ingresada es invalida. Seleccionar entre M, A o C.\n");
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             continue;
-        }
-
-        if (i == 6)
-        {
-            autosDomingo = contadorAutos;
         }
         //MOSTRAR VALORES INGRESADOS
         /*PREGUNTAR POR EL TICKET*/
