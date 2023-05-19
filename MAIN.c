@@ -47,10 +47,29 @@ void mostrarDia(int dia)
         break;
     }
 }
+void mostrarTicket(char categoria, int espacio, char patente[], float horasEstadia, float precio)
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
+
+    printf("\n VEHICULO: ");
+    mostrarCategoria(categoria);
+    printf("\n LUGAR DE ESTACIONAMIENTO: %d \n", espacio);
+    printf("\n PATENTE: %s\n", patente);
+    printf("\n HORAS DE ESTADIA: %.2f \n", horasEstadia);
+    printf("\n COSTO: %.2f\n", precio);
+
+    printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+    printf("\t\t\t\t\t!GRACIAS POR VENIR AL ESTACIONAMIENTO!");
+    printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
+
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+}
 
 
 int main()
 {
+	 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     int autosDomingo = 0;
     char camionetaMasTiempo[7];
@@ -183,21 +202,10 @@ int main()
         fflush(stdin);
         visualizarTicket = tolower(visualizarTicket);
 
-        if(visualizarTicket=='s')
-        {
-            printf("\n VEHICULO: ");
-            mostrarCategoria(categoria);
-            printf("\n LUGAR DE ESTACIONAMIENTO: %d \n",espacio);
-            printf("\n PATENTE: %s\n",patente);
-            printf("\n HORAS DE ESTADIA: %.2f \n", horasEstadia);
-            printf("\n COSTO: %.2f\n", precio);
-            SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-            printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
-            printf("\t\t\t\t\t!GRACIAS POR VENIR AL ESTACIONAMIENTO!");
-            printf("\nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
-            SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
-        }
-
+		if (visualizarTicket == 's')
+		{
+    		mostrarTicket(categoria, espacio, patente, horasEstadia, precio);
+		}
 
 
 
