@@ -66,11 +66,8 @@ void mostrarTicket(char categoria, int espacio, char patente[], float horasEstad
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 void calcularDiaMaxMotos(int *motosxdia){
-    int j;
-    for (j = 0; j < 7; j++) {
-        printf("%d ", *(motosxdia + j));
-    }
-    printf("CALCULADO DIA CON MAS MOTOS...\n\n");
+
+    printf("CALCULADO DIAS CON MAS MOTOS ESTACIONADAS...");
     int i, max, maxdia=0;
     max = *(motosxdia + 0);
     for (i = 0; i <= 6; i++) {
@@ -79,13 +76,13 @@ void calcularDiaMaxMotos(int *motosxdia){
             maxdia = i;
         }
     }
-    
+
     for (i = 0; i <= 6; i++) {
         if (*(motosxdia + i) == max) {
             mostrarDia(i);
         }
     }
-    
+
 
 }
 void calcularRecaudacionxDia(float *gananciaxDia)
@@ -167,7 +164,7 @@ int main()
             continue; //
         }
         espacioMasUtilizado[espacio-1]+=1;
-        
+
 		switch (categoria)
         {
         case 'm':
@@ -184,7 +181,7 @@ int main()
             diaMOTO[i]+=1;
             precio = horasEstadia * 50;
             recaudacionTotal += precio;
-            
+
             break;
         case 'a':
             printf("Ingrese la patente del auto (6 caracteres): ");
@@ -249,7 +246,7 @@ int main()
         //MOSTRAR VALORES INGRESADOS
         /*PREGUNTAR POR EL TICKET*/
         fflush(stdin);
-        
+
         char visualizarTicket;
         printf("\nDesea visualizar el ticket? (S: si, N: no): ");
         scanf("%c",&visualizarTicket);
@@ -267,9 +264,9 @@ int main()
 		printf("\nDesea continuar al siguiente dia? (S: si, N: no): ");
         scanf(" %c", &opcion);
         fflush(stdin);
-        opcion = tolower(opcion); // Convertir a minúscula        	
+        opcion = tolower(opcion); // Convertir a minúscula
 		}while((opcion!='s') && (opcion!='n'));
-        
+
         if (opcion == 's')
         {
             i++;
