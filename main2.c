@@ -66,32 +66,45 @@ void mostrarTicket(char categoria, int espacio, char patente[], float horasEstad
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 void calcularDiaMaxMotos(int *motosxdia){
+    int j;
+    for (j = 0; j < 7; j++) {
+        printf("%d ", *(motosxdia + j));
+    }
     printf("CALCULADO DIA CON MAS MOTOS...\n\n");
-    int i,max = *(motosxdia+0),maxdia;
-    for(i=0;i<7;i++){
-        if((*motosxdia+i)>max){
-            max = *(motosxdia+i);
+    int i, max, maxdia=0;
+    max = *(motosxdia + 0);
+    for (i = 0; i <= 6; i++) {
+        if (*(motosxdia + i) > max) {
+            max = *(motosxdia + i);
             maxdia = i;
         }
     }
-    mostrarDia(maxdia);
+    
+    for (i = 0; i <= 6; i++) {
+        if (*(motosxdia + i) == max) {
+            mostrarDia(i);
+        }
+    }
+    
 
 }
 void calcularRecaudacionxDia(float *gananciaxDia)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    printf("\n\n RECAUDACION X DIA\n\n");
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    printf(" RECAUDACION X DIA\n\n");
     int i;
     for(i=0;i<7;i++){
         mostrarDia(i);
         SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-        printf(" $ %.2f",*(gananciaxDia+i));
+        printf("\t $ %.2f",*(gananciaxDia+i));
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     }
 }
 void calcularPlayaMasUsada(int* espacioMayor){
-    printf("PLAYA MAS UTILIZADA...\n");
-    int i, max= *(espacioMayor+0),maxLUGAR;
+    int i,maxLUGAR=0;
+    int  max;
+    max = *(espacioMayor+0);
     for(i=0;i<10;i++){
         if(*(espacioMayor)>max)
         {
@@ -99,7 +112,7 @@ void calcularPlayaMasUsada(int* espacioMayor){
             maxLUGAR=i;
         }
     }
-    printf("PLAYA DE ESTACIONAMINENTO MAS UTILIZADA LA PLAYA N°  %d",maxLUGAR+i);
+    printf("PLAYA DE ESTACIONAMINENTO MAS UTILIZADA LA PLAYA N%c  [%d]\n",167 , maxLUGAR+1 );
 }
 int main()
 {
@@ -112,9 +125,9 @@ int main()
     int flag=0;
 
     //VECTORES
-    int diaMOTO[7]={0};
-    int espacioMasUtilizado[10]={0};
-    float gananciapordia[7]={0};
+    int diaMOTO[7]={0,0,0,0,0,0,0};
+    int espacioMasUtilizado[10]={0,0,0,0,0,0,0,0,0,0};
+    float gananciapordia[7]={0,0,0,0,0,0,0};
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN);
     printf("\n  88888888b .d88888b  d888888P  .d888888   a88888b. dP  .88888.  888888ba   .d888888  8888ba.88ba  dP  88888888b 888888ba  d888888P  .88888.");
     printf("\n   88        88.    '    88    d8'    88  d8'   `88 88 d8'   `8b 88    `8b d8'    88  88  `8b  `8b 88  88        88    `8b    88    d8'    8b");
@@ -125,7 +138,7 @@ int main()
     printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\n\n");
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     int i;
-    for (i = 0; i < 1;)
+    for (i = 0; i < 7;)
     {
         char categoria;
         float horasEstadia, precio;
@@ -153,7 +166,7 @@ int main()
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             continue; //
         }
-        espacioMasUtilizado[espacio]+=1;
+        espacioMasUtilizado[espacio-1]+=1;
         switch (categoria)
         {
         case 'm':
@@ -248,11 +261,13 @@ int main()
 
 
         char opcion;
-        printf("\nDesea continuar al siguiente dia? (S: si, N: no): ");
+        do{
+		printf("\nDesea continuar al siguiente dia? (S: si, N: no): ");
         scanf(" %c", &opcion);
         fflush(stdin);
-        opcion = tolower(opcion); // Convertir a minúscula
-
+        opcion = tolower(opcion); // Convertir a minúscula        	
+		}while((opcion!='s') && (opcion!='n'));
+        
         if (opcion == 's')
         {
             i++;
@@ -269,8 +284,9 @@ int main()
     calcularPlayaMasUsada(espacioMasUtilizado);
     printf(" 6. ");
     calcularDiaMaxMotos(diaMOTO);
-    printf(" 7. ");
+    printf("\n 7. ");
     calcularRecaudacionxDia(gananciapordia);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
     printf("\n  ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n");
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     return 0;
