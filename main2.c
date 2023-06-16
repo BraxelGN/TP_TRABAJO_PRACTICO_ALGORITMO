@@ -143,7 +143,7 @@ int main()
         char categoria;
         float horasEstadia, precio;
         int espacio;
-        char patente[7];
+        char patente[8];
         mostrarDia(i);
 
 
@@ -167,7 +167,8 @@ int main()
             continue; //
         }
         espacioMasUtilizado[espacio-1]+=1;
-        switch (categoria)
+        
+		switch (categoria)
         {
         case 'm':
             printf("Ingrese la patente de la moto (7 caracteres): ");
@@ -183,6 +184,7 @@ int main()
             diaMOTO[i]+=1;
             precio = horasEstadia * 50;
             recaudacionTotal += precio;
+            
             break;
         case 'a':
             printf("Ingrese la patente del auto (6 caracteres): ");
@@ -247,12 +249,12 @@ int main()
         //MOSTRAR VALORES INGRESADOS
         /*PREGUNTAR POR EL TICKET*/
         fflush(stdin);
+        
         char visualizarTicket;
         printf("\nDesea visualizar el ticket? (S: si, N: no): ");
         scanf("%c",&visualizarTicket);
         fflush(stdin);
         visualizarTicket = tolower(visualizarTicket);
-
 		if (visualizarTicket == 's')
 		{
     		mostrarTicket(categoria, espacio, patente, horasEstadia, precio);
